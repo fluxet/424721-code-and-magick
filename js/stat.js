@@ -67,7 +67,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'bottom';
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = 'black';
-    ctx.fillText(names[i], CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP );
+    ctx.fillText(names[i], CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP);
 
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
