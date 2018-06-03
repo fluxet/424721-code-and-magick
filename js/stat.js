@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
@@ -47,16 +47,16 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var  getRandom = function () {
-  return  Math.floor(Math.random () * 10) / 10;
+var getRandom = function () {
+  return Math.floor(Math.random() * 10) / 10;
 };
 
 window.renderStatistics = function (ctx, names, times) {
   renderCLOUD(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, SHADOW_COLOR);
   renderCLOUD(ctx, CLOUD_X, CLOUD_Y, CLOUD_COLOR);
 
-  renderPillar(ctx,CLOUD_X + CLOUD_WIDTH + GAP, CLOUD_Y + GAP, SHADOW_COLOR);
-  renderPillar(ctx,CLOUD_X + CLOUD_WIDTH, CLOUD_Y, PILLAR_COLOR);
+  renderPillar(ctx, CLOUD_X + CLOUD_WIDTH + GAP, CLOUD_Y + GAP, SHADOW_COLOR);
+  renderPillar(ctx, CLOUD_X + CLOUD_WIDTH, CLOUD_Y, PILLAR_COLOR);
 
   ctx.fillStyle = 'black';
   ctx.font = FONT_SIZE + 'px PT Mono';
@@ -67,19 +67,19 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'bottom';
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = 'black';
-    ctx.fillText(names[i], CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i ,CLOUD_Y + CLOUD_HEIGHT - GAP );
+    ctx.fillText(names[i], CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP );
 
-    if (names[i] == 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      barOpacity = getRandom ();
-      ctx.fillStyle = 'rgba(0,0,255,' + barOpacity + ')'
-    };
+      barOpacity = getRandom();
+      ctx.fillStyle = 'rgba(0,0,255,' + barOpacity + ')';
+    }
 
-    score = BAR_HEIGHT * times[i] / getMaxElement (times);
-    ctx.fillRect(CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - FONT_SIZE - GAP * 2, BAR_WIDTH,score  * (-1));
+    score = BAR_HEIGHT * times[i] / getMaxElement(times);
+    ctx.fillRect(CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - FONT_SIZE - GAP * 2, BAR_WIDTH, score * (-1));
     ctx.fillStyle = 'black';
 
     ctx.fillText(Math.round(times[i]), CLOUD_X + CLOUD_TONGUE + GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - FONT_SIZE - GAP * 3 - score);
-  };    
-}
+  }
+};
