@@ -1,11 +1,14 @@
 'use strict';
 
-var FONT_SIZE = 16;
-var fontParam = FONT_SIZE + 'px PT Mono';
+var fontParam = {
+  SIZE: 16,
+  COLOR: 'rgba(0,0,0,1)'
+};
 
-var cloud = {
+var cloudParam = {
   WIDTH: 420,
   HEIGHT: 270,
+  BORDER: 1,
   X: 100,
   Y: 10,
   TONGUE: 80,
@@ -13,24 +16,25 @@ var cloud = {
   COLOR: 'rgba(255,255,255,1)',
   SHADOW: 'rgba(0, 0, 0, 0.7)'
 };
-var pillar = {
+var pillarParam = {
   WIDTH: 10,
   HEIGHT: 300,
   COLOR: 'rgba(165,42,42,1)'
 };
-var bar = {
+var barParam = {
   WIDTH: 40,
   HEIGHT: 150,
-  GAP: 50
+  GAP: 50,
+  USER_COLOR: 'rgba(255, 0, 0, 1)'
 };
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.beginPath();
   ctx.moveTo(x, y);
-  ctx.lineTo(x + cloud.WIDTH, y);
-  ctx.lineTo(x + cloud.WIDTH, y + cloud.HEIGHT);
-  ctx.lineTo(x, y + cloud.HEIGHT);
-  ctx.lineTo(x + cloud.TONGUE, y + cloud.HEIGHT / 2);
+  ctx.lineTo(x + cloudParam.WIDTH, y);
+  ctx.lineTo(x + cloudParam.WIDTH, y + cloudParam.HEIGHT);
+  ctx.lineTo(x, y + cloudParam.HEIGHT);
+  ctx.lineTo(x + cloudParam.TONGUE, y + cloudParam.HEIGHT / 2);
   ctx.lineTo(x, y);
   ctx.strokeStyle = color;
   ctx.stroke();
@@ -40,7 +44,7 @@ var renderCloud = function (ctx, x, y, color) {
 
 var renderPillar = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y - 1, pillar.WIDTH, pillar.HEIGHT);
+  ctx.fillRect(x, y - cloudParam.BORDER, pillarParam.WIDTH, pillarParam.HEIGHT);
 };
 
 var wrapText = function (ctx, text, marginLeft, marginTop, maxWidth, lineHeight) {
@@ -61,37 +65,39 @@ var wrapText = function (ctx, text, marginLeft, marginTop, maxWidth, lineHeight)
   ctx.fillText(line, marginLeft, marginTop);
 };
 
-var getRandomBlue = function () {
-  var opacity = Math.floor(Math.random() * 9) / 10 + 0.1;
-  var randomBlue = 'rgba(0,0,255,' + opacity + ')';
-  return randomBlue;
-};
-
 var getDiagram = function (ctx, players, results, index) {
   var score;
-  ctx.fillStyle = 'rgba(0,0,0,1)';
-  ctx.fillText(players[index], cloud.X + cloud.TONGUE + cloud.GAP + (bar.WIDTH + bar.GAP) * index, cloud.Y + cloud.HEIGHT - cloud.GAP);
-  ctx.fillStyle = getRandomBlue();
-  if (players[index] === 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  }
-  score = bar.HEIGHT * results[index] / Math.max.apply(null, results);
-  ctx.fillRect(cloud.X + cloud.TONGUE + cloud.GAP + (bar.WIDTH + bar.GAP) * index, cloud.Y + cloud.HEIGHT - FONT_SIZE - cloud.GAP * 2, bar.WIDTH, score * (-1));
-  ctx.fillStyle = 'rgba(0,0,0,1)';
-  ctx.fillText(Math.round(results[index]), cloud.X + cloud.TONGUE + cloud.GAP + (bar.WIDTH + bar.GAP) * index, cloud.Y + cloud.HEIGHT - FONT_SIZE - cloud.GAP * 3 - score);
+  ctx.fillStyle = fontParam.COLOR;
+  ctx.fillText(players[index], cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - cloudParam.GAP);
+  
+  var getRandomBlue = function () {
+    var decimalRoundRate = 10;
+    var opacityMin = 0.1;
+    var opacityMax = 1;
+    var opacity = Math.floor(Math.random() * (opacityMax - opacityMin) * decimalRoundRate) / decimalRoundRate + opacityMin;
+    var randomBlue = 'rgba(0,0,255,' + opacity + ')';
+    return randomBlue;
+  };
+  
+  ctx.fillStyle = (players[index] === 'Вы') ? barParam.USER_COLOR : getRandomBlue();
+  score = barParam.HEIGHT * results[index] / Math.max.apply(null, results);
+  ctx.fillRect(cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - fontParam.SIZE - cloudParam.GAP * 2, barParam.WIDTH, score * (-1));
+  
+  ctx.fillStyle = fontParam.COLOR;
+  ctx.fillText(Math.round(results[index]), cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - fontParam.SIZE - cloudParam.GAP * 3 - score);
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, cloud.X + cloud.GAP, cloud.Y + cloud.GAP, cloud.SHADOW);
-  renderCloud(ctx, cloud.X, cloud.Y, cloud.COLOR);
+  renderCloud(ctx, cloudParam.X + cloudParam.GAP, cloudParam.Y + cloudParam.GAP, cloudParam.SHADOW);
+  renderCloud(ctx, cloudParam.X, cloudParam.Y, cloudParam.COLOR);
 
-  renderPillar(ctx, cloud.X + cloud.WIDTH + cloud.GAP, cloud.Y + cloud.GAP, cloud.SHADOW);
-  renderPillar(ctx, cloud.X + cloud.WIDTH, cloud.Y, pillar.COLOR);
+  renderPillar(ctx, cloudParam.X + cloudParam.WIDTH + cloudParam.GAP, cloudParam.Y + cloudParam.GAP, cloudParam.SHADOW);
+  renderPillar(ctx, cloudParam.X + cloudParam.WIDTH, cloudParam.Y, pillarParam.COLOR);
 
-  ctx.fillStyle = 'rgba(0,0,0,1)';
-  ctx.font = fontParam;
+  ctx.fillStyle = fontParam.COLOR;
+  ctx.font = fontParam.SIZE + 'px PT Mono';
   ctx.textBaseline = 'hanging';
-  wrapText(ctx, 'Ура, вы победили! Список результатов:', cloud.X + cloud.TONGUE + cloud.GAP, cloud.Y + cloud.GAP, cloud.WIDTH - cloud.TONGUE - cloud.GAP, FONT_SIZE + cloud.GAP);
+  wrapText(ctx, 'Ура, вы победили! Список результатов:', cloudParam.X + cloudParam.TONGUE + cloudParam.GAP, cloudParam.Y + cloudParam.GAP, cloudParam.WIDTH - cloudParam.TONGUE - cloudParam.GAP, fontParam.SIZE + cloudParam.GAP);
 
   ctx.textBaseline = 'bottom';
   for (var i = 0; i < names.length; i++) {
