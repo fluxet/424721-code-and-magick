@@ -69,7 +69,7 @@ var getDiagram = function (ctx, players, results, index) {
   var score;
   ctx.fillStyle = fontParam.COLOR;
   ctx.fillText(players[index], cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - cloudParam.GAP);
-  
+
   var getRandomBlue = function () {
     var decimalRoundRate = 10;
     var opacityMin = 0.1;
@@ -78,11 +78,11 @@ var getDiagram = function (ctx, players, results, index) {
     var randomBlue = 'rgba(0,0,255,' + opacity + ')';
     return randomBlue;
   };
-  
+
   ctx.fillStyle = (players[index] === 'Вы') ? barParam.USER_COLOR : getRandomBlue();
   score = barParam.HEIGHT * results[index] / Math.max.apply(null, results);
   ctx.fillRect(cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - fontParam.SIZE - cloudParam.GAP * 2, barParam.WIDTH, score * (-1));
-  
+
   ctx.fillStyle = fontParam.COLOR;
   ctx.fillText(Math.round(results[index]), cloudParam.X + cloudParam.TONGUE + cloudParam.GAP + (barParam.WIDTH + barParam.GAP) * index, cloudParam.Y + cloudParam.HEIGHT - fontParam.SIZE - cloudParam.GAP * 3 - score);
 };
