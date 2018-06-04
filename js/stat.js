@@ -16,13 +16,13 @@ var cloud = {
 var pillar = {
   WIDTH: 10,
   HEIGHT: 300,
-  COLOR:  'rgba(165,42,42,1)' 
+  COLOR: 'rgba(165,42,42,1)'
 };
 var bar = {
   WIDTH: 40,
   HEIGHT: 150,
   GAP: 50
-}
+};
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.beginPath();
@@ -44,23 +44,23 @@ var renderPillar = function (ctx, x, y, color) {
 };
 
 var wrapText = function (ctx, text, marginLeft, marginTop, maxWidth, lineHeight) {
-  var words = text.split(" ");
+  var words = text.split(' ');
   var countWords = words.length;
-  var line = "";
+  var line = '';
   for (var i = 0; i < countWords; i++) {
-      var testLine = line + words[i] + " ";
-      var testWidth = ctx.measureText(testLine).width;
-      if (testWidth > maxWidth) {
-          ctx.fillText(line, marginLeft, marginTop);
-          line = words[i] + " ";
-          marginTop += lineHeight;
-      }
-      else {
-          line = testLine;
-      }
+    var testLine = line + words[i] + ' ';
+    var testWidth = ctx.measureText(testLine).width;
+    if (testWidth > maxWidth) {
+        ctx.fillText(line, marginLeft, marginTop);
+        line = words[i] + ' ';
+        marginTop += lineHeight;
+    }
+    else {
+        line = testLine;
+    }
   }
   ctx.fillText(line, marginLeft, marginTop);
-}
+};
 
 var getRandomBlue = function () {
   var opacity = Math.floor(Math.random() * 9) / 10 + 0.1;
