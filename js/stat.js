@@ -51,12 +51,11 @@ var wrapText = function (ctx, text, marginLeft, marginTop, maxWidth, lineHeight)
     var testLine = line + words[i] + ' ';
     var testWidth = ctx.measureText(testLine).width;
     if (testWidth > maxWidth) {
-        ctx.fillText(line, marginLeft, marginTop);
-        line = words[i] + ' ';
-        marginTop += lineHeight;
-    }
-    else {
-        line = testLine;
+      ctx.fillText(line, marginLeft, marginTop);
+      line = words[i] + ' ';
+      marginTop += lineHeight;
+    } else {
+      line = testLine;
     }
   }
   ctx.fillText(line, marginLeft, marginTop);
