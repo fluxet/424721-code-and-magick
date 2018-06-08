@@ -17,7 +17,7 @@ var getWizards = function (names, surnames, coats, eyes) {
     var wizardParam = {};
     var randomNameIndex = getRandomIndex(names);
     var randomSurnameIndex = getRandomIndex(surnames);
-    var randomCoatIndex =  getRandomIndex(coats);
+    var randomCoatIndex = getRandomIndex(coats);
     var randomEyeIndex = getRandomIndex(eyes);
 
     wizardParam.name = names[randomNameIndex] + ' ' + surnames[randomSurnameIndex];
@@ -29,7 +29,7 @@ var getWizards = function (names, surnames, coats, eyes) {
     surnames.splice(randomSurnameIndex, 1);
     coats.splice(randomCoatIndex, 1);
     eyes.splice(randomEyeIndex, 1);
-  };
+  }
   return wizards;
 };
 
@@ -56,7 +56,7 @@ var renderWizard = function (wizard) {
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
-};
+}
 similarListElement.appendChild(fragment);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
