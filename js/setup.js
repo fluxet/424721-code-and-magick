@@ -22,7 +22,7 @@ var getWizards = function (names, surnames, coats, eyes) {
 
     wizardParam.name = names[randomNameIndex] + ' ' + surnames[randomSurnameIndex];
     wizardParam.coatColor = coats[randomCoatIndex];
-    wizardParam.eyeColor = eyes[randomEyeIndex];
+    wizardParam.eyesColor = eyes[randomEyeIndex];
     wizards[i] = wizardParam;
 
     names.splice(randomNameIndex, 1);
@@ -49,7 +49,7 @@ var renderWizard = function (wizard) {
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyeColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   return wizardElement;
 };
 
