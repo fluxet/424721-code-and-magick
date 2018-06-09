@@ -6,7 +6,7 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYES_COLORS = ['rgb(0,0,0)', 'rgb(255,0,0)', 'rgb(0,0,255)', 'rgb(255,255,0)', 'rgb(0,255,0)'];
 var WIZARD_NUMBER = 4;
 
-var getRandomIndex = function(arrayLength) {
+var getRandomIndex = function (arrayLength) {
   return Math.floor(Math.random() * (arrayLength - 1));
 };
 
@@ -54,18 +54,18 @@ var renderWizard = function (wizard) {
 };
 
 var getFragment = function (wizards) {
-	var fragment = document.createDocumentFragment();
-	for (var i = 0; i < wizards.length; i++) {
-		fragment.appendChild(renderWizard(wizards[i]));
-	}	
-	return fragment;
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+  return fragment;
 };
 
 var initPage = function () {
-	var element = document.querySelector('.setup');
-	element.classList.remove('hidden');
-	element.querySelector('.setup-similar').classList.remove('hidden');
-	return element;
+  var element = document.querySelector('.setup');
+  element.classList.remove('hidden');
+  element.querySelector('.setup-similar').classList.remove('hidden');
+  return element;
 };
 
 var userDialog = initPage();
