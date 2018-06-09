@@ -15,7 +15,7 @@ var shuffleCopyArray = function (arrayOld) {
   for (var i = 0; i < arrayOld.length; i++) {
     arrayNew.push(arrayOld[i]);
   }
-  for(i = 0; i < arrayNew.length; i++) {
+  for (i = 0; i < arrayNew.length; i++) {
     var elementCopy = arrayNew[i];
     var randomIndex = getRandomIndex(arrayNew.length);
     arrayNew[i] = arrayNew[randomIndex];
